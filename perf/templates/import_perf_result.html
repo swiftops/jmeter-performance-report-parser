@@ -1,0 +1,34 @@
+<!-- This file provides a perf compare ui using which user can upload jmeter performance report files in db -->
+
+<html>
+    <head>
+        <title>Performance Report Upload</title>
+    </head>
+    <body>
+        <form action = "/ms-perfcompare/importPerfResult" method = "POST" enctype = "multipart/form-data">
+            <table border=0>
+                <tr>
+                    <td>SwiftEnterprise Release: </td>
+                    <td><input type="text" name = "release"></td>
+                </tr><tr>
+                    <td>Build: </td>
+                    <td><input type="number" name = "build"></td>
+                </tr><tr>
+                    <td>Perf Run Date: </td>
+                    <td><input type="date" name = "date"></td>
+                </tr><tr>
+                    <td>Application Type:</td>
+                    <td><select name="Application_Type">
+                            <option value="Jboss">Jboss</option>
+                            <option value="Wildfly">Wildfly</option>
+                        </select>
+                    </td>
+                </tr><tr>
+                    <td>Result CSV: </td>
+                    <td><input type = "file" name = "file" accept = ".csv"/></td>
+                </tr>
+            </table>
+            <input type = "submit"/>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+
+		<script>
+			$(document).ready( function () {
+				$('#table_id').DataTable({
+					paging: false
+				});
+				} );
+		</script>
+	</head>
+	<body>
+		<div><h1>SwiftEnterprise {{Application_Type}} performance report comparison</h1></div>
+		<table id="table_id" class="display">
+			<thead style="background: antiquewhite;">
+				<tr class="row100 head">
+					<th class="column100 column1" data-column="column1" rowspan="2">Module</th>
+					<th class="column100 column2"  colspan = "2">Baseline Release({{baseline}})</th>
+					<th class="column100 column3"  colspan = "2">Current Release({{current}})</th>
+					<th class="column100 column4" data-column="column4" rowspan="2">% Change(90 percentile)</th>
+					<th class="column100 column5" data-column="column5" rowspan="2">state</th>
+				</tr>
+				<tr>
+					<th class="column100 column2" data-column="column2">90 percentile for release({{baseline}})</th>
+					<th class="column100 column2" data-column="column6">No of times script executed({{baseline}})</th>
+					<th class="column100 column2" data-column="column3">90 percentile for release({{current}})</th>
+					<th class="column100 column2" data-column="column7">No of times script executed({{current}})</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for module in modules_current %}
+					<tr class="row100">
+					<td class="column100 column1" data-column="column1">{{ module }}</td>
+
+                    {% if module in modules_base %}
+                        <td class="column100 column2" data-column="column2">{{ modules_base[module]['aggregate_report_90%_line'] }}</td>
+                    {% else %}
+                        <td class="column100 column2" data-column="column2">NA</td>
+                    {% endif %}
+
+                    {% if module in modules_base %}
+                        <td class="column100 column6" data-column="column6">{{ modules_base[module]['aggregate_report_count'] }}</td>
+                    {% else %}
+                        <td class="column100 column6" data-column="column6">NA</td>
+                    {% endif %}
+
+					<td class="column100 column3" data-column="column3">{{ modules_current[module]['aggregate_report_90%_line'] }}</td>
+
+                    {% set current = modules_current[module]['aggregate_report_90%_line'] %}
+                    {% if (module in modules_base) %}
+                            {% if (modules_base[module]['aggregate_report_90%_line'] == '0' ) %}
+                                {% set base = 'NA' %}
+                                {% set percent_change = 'NA' %}
+                            {% else %}
+                                {% set base = modules_base[module]['aggregate_report_90%_line'] %}
+                                {% set percent_change = ((current | float - base | float) / base | float) * 100 %}
+                            {% endif %}
+
+                    {% endif %}
+
+					<td class="column100 column7" data-column="column7">{{ modules_current[module]['aggregate_report_count'] }}</td>
+
+                    {% if module in modules_base %}
+                       <td class="column100 column5" data-column="column5">{{ percent_change | int }}</td>
+                    {% else %}
+                        <td class="column100 column2" data-column="column2">NA</td>
+                    {% endif %}
+
+					{% if module in modules_base %}
+					    {% if current | float <= 1.05 | float * base | int %}
+						    <td class="column100 column4" data-column="column4" bgcolor="#c4ffc4">Pass</td>
+					    {% else %}
+						    <td class="column100 column4" data-column="column4" bgcolor="#ffadb5">Fail</td>
+					    {% endif %}
+                    {% else %}
+                        <td class="column100 column4" data-column="column4" bgcolor="#808080">NA</td>
+                    {% endif %}
+
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,100 @@
+    <html>
+    <head>
+        <title>{{title}}</title>
+        <script type="text/javascript" charset="utf8" src="/static/js/jquery-1.12.4.js"></script>
+    </head>
+
+    <body onload="showData('Jboss')">
+    {% block body %}
+    
+    {% if not is_dev_mode %}
+        <form method="POST" action="/ms-perfcompare/perfcompareui">
+    {% else %}
+        <form method="POST" action="/perfcompareui">
+    {% endif %}
+ 
+    {% endblock %}
+            <table border="1">
+                <tr>
+                    <th>Applicaton Type : </th>
+                    <td>
+                        <select name="type" id="type" onchange="showData(this.value)">
+                            <option value="Jboss">None</option>
+                            <option value="Jboss">Jboss</option>
+                            <option value="Wildfly">Wildfly</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Baseline Release : </th>
+                    <td>
+                        <select name="base_rel" id="base_rel"></select>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>Current Release : </th>
+                    <td>
+                        <select name="curr_rel" id="curr_rel">
+
+                        </select>
+                    </td>
+                </tr>
+    <script type="text/javascript">
+        var w_selectedType = ''
+        function showData(a_selectedType){
+            w_selectedType = a_selectedType
+            var tmp = document.getElementById("type").value;
+            if (tmp)
+            {
+                w_selectedType = tmp;
+            }
+            var w_data = ''
+            if (w_selectedType == 'Jboss') {
+               w_data = {{data['Jboss']|safe}};
+               addElement(w_data);
+                }
+            else if (w_selectedType == 'Wildfly'){
+                w_data = {{data['Wildfly']|safe}};
+                addElement(w_data);
+               }
+        }
+        function addElement(a_data){
+            var w_releases = document.getElementById("base_rel");
+            var w_currentRelease = document.getElementById("curr_rel");
+
+            	while(w_releases.length > 0)
+				{
+					 w_releases.remove(w_releases);
+				}
+				while(w_currentRelease.length > 0)
+				{
+					 w_currentRelease.remove(w_currentRelease);
+				}
+
+			for(i = 0; i < a_data.length ; i++)
+				{
+					     var w_baseOption = document.createElement("option");
+					     var w_currentOption = document.createElement("option");
+					     var w_displaydata = a_data[i]
+
+					     w_baseOption.setAttribute("value",w_displaydata);
+						 w_baseOption.text = w_displaydata;
+
+						 w_currentOption.setAttribute("value",w_displaydata);
+						 w_currentOption.text = w_displaydata;
+
+						 w_releases.add(w_baseOption,w_releases[i]);
+						 w_currentRelease.add(w_currentOption,w_currentRelease[i]);
+			    }
+        }
+
+    </script>
+                <tr>
+                    <td colspan="2" align="right"><input type="submit" > </td>
+                </tr>
+            </table>
+        
+        </form>
+    </body>
+</html>

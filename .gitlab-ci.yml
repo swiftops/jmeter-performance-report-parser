@@ -1,0 +1,13 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+ before_script:
+  - docker login -u "<username>" -p "<password>"
+  - docker info
+  - docker-compose --version
+  
+build:
+  script:         
+    - docker-compose up --build

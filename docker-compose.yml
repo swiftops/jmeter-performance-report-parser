@@ -1,0 +1,19 @@
+version: "2.0"
+services:
+
+ mongo_jmeter:
+   image: digite/mongo_jmeter:latest
+   container_name: mongo_jmeter
+   ports:
+   - "27017:27017"
+
+
+ ms-jmeterperfcompare:
+   image: digite/ms-jmeterperfcompare:latest
+   build : .
+   container_name: ms-jmeterperfcompare     
+   ports:
+   - "5003:5003"
+
+
+ 
