@@ -26,10 +26,10 @@ perfcompareui service would display a html form which would take Applicaton Type
 
 ### Pre-Requisite
 
-1.python 3.6.0 or above version.
-2.docker (optional) Refer [Install Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04) documentation.
-3.docker-compose
-3.linux os (optional)
+1. python 3.6.0 or above version.
+2. docker (optional) Refer [Install Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04) documentation.
+3. docker-compose
+4. linux os (optional)
 
 
 ### Installation
@@ -45,10 +45,11 @@ example.
 
 
 [mongo_Params]
-mongo_ip = 10.0.2.10
-mongo_port = 27017
-db_name = perf_db
-db_collection = perf_coll
+1. mongo_ip = 10.0.2.10
+2. mongo_port = 27017
+3. db_name = perf_db
+4. db_collection = perf_coll
+
 
 
 ##### Run services
@@ -71,11 +72,11 @@ On successfull start of your micro-service a html page would be displayed as bel
 
 
 Example:
-SwiftALM Release: 4.0.0  (your product release)
-Build: 20 (your release build number)
-Perf Run Date: 20/09/1994 (your jmeter result run date)
-Application Type : Jboss (your application server ,i.e jboss or wildfly)
-Result CSV: click on choose file button and browse to the path were jmeter xml file is present.(for demo purpose xml file is given in jmeter_csv_file_example directory which can be found at root of project.)
+1. SwiftALM Release: 4.0.0  (your product release)
+2. Build: 20 (your release build number)
+3. Perf Run Date: 20/09/1994 (your jmeter result run date)
+4. Application Type : Jboss (your application server ,i.e jboss or wildfly)
+5. Result CSV: click on choose file button and browse to the path were jmeter xml file is present.(for demo purpose xml file is given in jmeter_csv_file_example directory which can be found at root of project.)
 
 
 2.For perfcompareui
@@ -89,9 +90,9 @@ On successfull start of your micro-service a html page would be displayed as bel
 
 
 Example:
-Applicaton Type : Jboss (your application server name)
-Baseline Release : 4.2.0_15 (select your jmeter performance baseline release from available dropdown)
-Current Release : 4.4.0_25 (elect your jmeter performance current release from available dropdown)
+1. Applicaton Type : Jboss (your application server name)
+2. Baseline Release : 4.2.0_15 (select your jmeter performance baseline release from available dropdown)
+3. Current Release : 4.4.0_25 (elect your jmeter performance current release from available dropdown)
 
 
 On clicking submit button a performance report in form of html page would be displayed which would display comparison result based on Baseline Release and Current Release present if present in db.
