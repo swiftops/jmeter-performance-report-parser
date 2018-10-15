@@ -36,11 +36,11 @@ perfcompareui service would display a html form which would take Applicaton Type
 ##### Checkout Repository
 Checkout project code from git.
 ```
-git clone https://github.com/digitedevops/jMeter-Performance-Report-Parser.git
+git clone https://github.com/digitedevops/jmeter-performance-report-parser.git
 ```
 
 ##### Configuration
-You have to specify your database ip,port,db name and collection name in config.ini file which is present at root directory.
+You have to specify your database ip,port,db name and collection name in config.ini file which  would be used to establish connection with mongo db.File is located at root directory.
 example.
 
 
@@ -49,7 +49,6 @@ example.
 2. mongo_port = 27017
 3. db_name = perf_db
 4. db_collection = perf_coll
-
 
 
 ##### Run services
