@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/swiftops/swiftops/_apis/build/status/swiftops.jmeter_perf_compare)](https://dev.azure.com/swiftops/swiftops/_build/latest?definitionId=1)
+
 # jMeter Performace Result Upload Utility
 
 ### Indoduction
