@@ -1,5 +1,6 @@
 [![Build Status](https://dev.azure.com/swiftops/swiftops/_apis/build/status/swiftops.jmeter_perf_compare)](https://dev.azure.com/swiftops/swiftops/_build/latest?definitionId=1)
 
+
 # jMeter Performace Result Upload Utility
 
 ### Indoduction
@@ -38,7 +39,7 @@ perfcompareui service would display a html form which would take Applicaton Type
 ##### Checkout Repository
 Checkout project code from git.
 ```
-git clone https://github.com/digitedevops/jmeter-performance-report-parser.git
+git clone https://github.com/swiftops/jmeter-performance-report-parser.git
 ```
 
 ##### Configuration
