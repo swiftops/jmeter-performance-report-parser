@@ -53,6 +53,18 @@ example.
 3. db_name = perf_db
 4. db_collection = perf_coll
 
+##### Steps to start microservice
+
+Once you are done with pre-requisite execute below command to start slack microservice.
+
+With custom Mongo database.
+ Create a schema named as perf_db and import the default collection i.e perf_db.json provided in this repository.Run the below command to restore the collection and start the service.
+```
+mongoimport --db perf_db --collection perf_coll --file per_db.json --jsonArray
+docker build -t <image_name>
+docker run --name jmeter_perf_compare -p 5003:5003 -d <image_name>
+```
+
 
 ##### Run services
 In order to run this script, need to run below script from command line under project root directory.
