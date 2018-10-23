@@ -3,7 +3,7 @@
 
 # jMeter Performace Result Upload Utility
 
-### Indoduction
+### Introduction
 [jMeter](https://jmeter.apache.org/) is an Open Source testing software. It is 100% pure Java application for load and performance testing. jMeter is designed to cover categories of tests like load, functional, performance, regression, etc.
 
 jMeter run produces output in various format like xml, csv etc. This utility has micro-services that would read .csv report and store it into Mongo db provided by user.The result stored in mongo db can be used to compare results between two different runs.
