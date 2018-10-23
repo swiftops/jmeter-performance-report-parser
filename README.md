@@ -23,8 +23,14 @@ perfcompareui service would display a html form which would take Applicaton Type
 
 ### Assumption
 
-1. This microservice for Jmeter Automation run. So It is assumed that jmeter  has been installed on your system.
-2. Jmeter run report should be saved in XML format.
+1. It is assumed that jmeter result is generated as an JTL format aggregatereport.
+2. CSV file can be generated  using below cmd.
+	
+	```
+	JMeterPluginsCMD --generate-csv <file_name>.csv --input-jtl <input_jtl_file>.jtl --plugin-type AggregateReport
+	```
+
+
 
 
 ### Pre-Requisite
@@ -33,6 +39,8 @@ perfcompareui service would display a html form which would take Applicaton Type
 2. docker (optional) Refer [Install Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04) documentation.
 3. docker-compose
 4. linux os (optional)
+5. mongo db
+
 
 
 ### Installation
@@ -80,13 +88,16 @@ In order to call above microservices. we just need to hit below URL  from the br
 ```
 	http://<yourip>:5002/uploadcsv
 ```
+
+NOTE : Atleast two records should be present in db to generate result.
+
 On successfull start of your micro-service a html page would be displayed as below :
 
 ![alt text](screenshot/uploadcsv.PNG)	
 
 
 Example:
-1. SwiftALM Release: 4.0.0  (your product release)
+1. Product Release: 4.0.0 (your product release)
 2. Build: 20 (your release build number)
 3. Perf Run Date: 20/09/1994 (your jmeter result run date)
 4. Application Type : Jboss (your application server ,i.e jboss or wildfly)
