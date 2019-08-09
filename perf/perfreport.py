@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from flask import Flask, render_template, request, url_for, redirect
+from flask import render_template, request, url_for, redirect
 import csv
 import json
 import configparser
@@ -9,9 +9,7 @@ config = configparser.ConfigParser()
 config.read("config.ini")
 #file level variable block starts
 
-'''
-Below paramters reads data from config.ini file
-'''
+# Below paramters reads data from config.ini file
 mongo_ip = config.get("mongoParams", "mongo_ip")
 if mongo_ip == '' :
 	mongo_ip = 'mongo_perf'
@@ -27,7 +25,6 @@ if db_name == '' :
 db_collection = config.get("mongoParams", "db_collection")
 if db_collection == '' :
 	db_collection = 'perf_coll'
-
 
 CLIENT = MongoClient(mongo_ip,int(mongo_port))
 MONGO_PERF_DB = CLIENT[db_name]
@@ -76,8 +73,10 @@ def perf_csv_parser(filename, release, build, collection, date, application):
         return "Error occured while parsing csv .Error is " + e.__str__()
     return True
 
+
 def importperfresult():
     return render_template('import_perf_result.html', title="Import Perf Results", is_dev_mode=IS_DEV_MODE)
+
 
 def upload_file():
     '''
@@ -94,6 +93,7 @@ def upload_file():
             return "Error occured while uploading file .Error is " + e.__str__()
     return 'Data imported into Mongo DB'
 
+
 def perf_compare_ui():
 
     '''
@@ -105,7 +105,7 @@ def perf_compare_ui():
         if request.method == 'GET':
             try:
                 releases = (MONGO_PERF_COLLECTION.find({}, {'Release': 1,'Application_Type':4}))
-                for key, value in enumerate(releases):
+                for value in releases:
                                     if value['Application_Type']=='Jboss' :
                                         release_list['Jboss'].append(value['Release'])
                                     else:
@@ -125,7 +125,6 @@ def perf_compare_ui():
     except Exception as e:
         return "Error occured while rendering perf compare ui html page .Error is " + e.__str__()
 
-    
 
 def perf_compare(baseline_release, current_release):
     '''
@@ -161,6 +160,7 @@ def perf_compare(baseline_release, current_release):
     return render_template('index_sort.html', title='Sorted Perf Report', Application_Type=application_type,
                            modules_base=modules_base, modules_current=modules_current, baseline=baseline_release,
                            current=current_release, backurl=perfcompareui)
+
 
 def perf_compare_json_report():
     '''
@@ -224,6 +224,7 @@ def perf_compare_json_report():
         data['result'] += [[module_name, aggregate_report_90_percentile_baseline,aggregate_report_count_baseline, aggregate_report_90_percentile_current,aggregate_report_count_current, percent_deviation, status]]
     return getsuccessresponse(returndata)
 
+
 def getsuccessresponse(data):
     returndata = {}
     returndata["success"] = "true"
@@ -238,4 +239,3 @@ def builderrorresponse(data):
     returndata["data"] = {}
     returndata["error"] = data
     return json.dumps(returndata)
-
